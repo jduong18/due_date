@@ -4,6 +4,7 @@ import Footer from "./Footer.jsx";
 import CreateEvent from "./CreateEvent.jsx";
 import EventCard from "./EventCard.jsx"
 import * as serverCalls from "../apiCalls.js";
+import { optionGroupUnstyledClasses } from "@mui/base";
 
 
 
@@ -11,10 +12,6 @@ function App(){
 
     
     const [cards,setCards] = React.useState([]);
-
-
-
-
 
     useEffect(()=>{
         serverCalls.getFromServer(setCards);
@@ -42,11 +39,30 @@ function App(){
 
 
 
+
+
+    useEffect(()=>{
+        let sortingCards = cards;
+
+        let tempCards = sortingCards.sort((a,b)=>{
+            return new Date (b.eventTime) - new Date(a.eventTime);
+        })
+        setCards(tempCards)
+    },[cards])
+
+
+
+
+
+
+
+
+
     return(
         <div>
             <Header />
             <CreateEvent inputNewEvent = {addCard}/>
-            {cards.map((item)=>(
+            {cards.sort((a,b)=>{return new Date (b.eventTime) - new Date (a.eventTime)}).map((item)=>(
                 <EventCard 
                     key= {item._id}
                     id= {item._id}
@@ -55,6 +71,13 @@ function App(){
                     deleteCard = {removeCard}
                 />
             ))}
+
+
+
+
+
+
+
             <Footer />
         </div>
     );

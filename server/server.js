@@ -59,6 +59,7 @@ const EventModel = mongoose.model("Event", eventSchema);
 
 
 app.get("/api",(req,res) => {
+    let result = []
     EventModel.find((err, events) =>{
         if(err){
             console.log(err);
@@ -66,9 +67,8 @@ app.get("/api",(req,res) => {
         else{
             res.json({"events":events})
         }
-    })
+    });
 
-;
 })
 
 

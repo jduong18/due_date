@@ -19,8 +19,6 @@ function getFromServer(setState){
 
 
 
-
-
 function postToServer(postObject){
     fetch('http://localhost:5000/api', {
         method: 'POST',
@@ -38,6 +36,7 @@ function postToServer(postObject){
             console.error('Error:', error);
         });
 }   
+
 
 
 function removeFromServer(idToRemove){

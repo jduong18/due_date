@@ -18,25 +18,17 @@ function EventCard(props){
 
     let timeRemaining = (props.content - new Date())/(1000);
 
-
-    let seconds = Math.floor(timeRemaining%60);
-
     let minutes = Math.floor((timeRemaining/60)%60);
 
     let hours = Math.floor(timeRemaining/(60*60));
 
 
-    
-
-
-    
 
 
     return(
         <div className="note">
             <h1>{props.title}</h1>
-             <p>{hours + " hours " + minutes + " minutes left "}</p> 
-             <p>{"seconds: "+ seconds}</p>
+             <p>{hours + " hours " + minutes + " minutes left "}</p>
             <button onClick={()=>props.deleteCard(props.id)}>
                 <DeleteIcon />
             </button>
