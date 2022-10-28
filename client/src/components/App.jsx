@@ -7,8 +7,13 @@ import EventCard from "./EventCard.jsx"
 
 function App(){
 
+    
+    const [cards,setCards] = React.useState([]);
 
-    useEffect(()=>{
+
+
+
+    function grabFromAPI(){
         fetch("http://localhost:5000/api").then(
             response => response.json(
             ).then(
@@ -17,7 +22,11 @@ function App(){
                 }
             )
         )
-    }, [])
+    }
+
+    useEffect(()=>{
+        grabFromAPI();
+    }, [cards])
 
 
 
@@ -25,7 +34,6 @@ function App(){
 
 
 
-    const [cards,setCards] = React.useState([]);
 
     
     function addCard(inputCard){
@@ -48,14 +56,31 @@ function App(){
         });
 
 
+        grabFromAPI();
 
-        setCards(previous=>{
-            return[...previous,inputCard];
-        });
+        // setCards(previous=>{
+        //     return[...previous,inputCard];
+        // });
     }
 
 
     function removeCard(idToDelete){
+
+        fetch(("http://localhost:5000/api/"+idToDelete),{
+            method: 'DELETE',
+        })
+        .then((response)=>response.json())
+        .then((data)=>{
+            console.log("Succesfully Deleted")
+        })
+        .catch(err=>{
+            console.error(err)
+        })
+
+
+
+
+
         setCards(previous=>{
             return previous.filter((item,index)=>{
                 return item._id !== idToDelete
@@ -64,11 +89,17 @@ function App(){
     }
 
 
+
+    function showCards(){
+        
+    }
+
     return(
         <div>
             <Header />
             <CreateEvent inputNewEvent = {addCard}/>
-            {cards.map((item, index)=>(
+
+            {cards.map((item)=>(
                 <EventCard 
                     key= {item._id}
                     id= {item._id}

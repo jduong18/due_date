@@ -95,6 +95,26 @@ app.post("/api",(req,res)=>{
 
 
 
+app.delete("/api/:idToDelete",(req,res)=>{
+    EventModel.deleteOne({_id: req.params.idToDelete},(err)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log("Deleted inside server")
+        }
+    })
+})
+
+
+
+
+
+
+
+
+
+
 app.listen(5000, ()=>{
     console.log("Server started on port 5000");
 })
