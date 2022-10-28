@@ -3,6 +3,8 @@ import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import CreateEvent from "./CreateEvent.jsx";
 import EventCard from "./EventCard.jsx"
+import * as serverCalls from "../apiCalls.js";
+
 
 
 function App(){
@@ -13,73 +15,23 @@ function App(){
 
 
 
-    function grabFromAPI(){
-        fetch("http://localhost:5000/api").then(
-            response => response.json(
-            ).then(
-                data => {
-                    setCards(data.events)
-                }
-            )
-        )
-    }
 
     useEffect(()=>{
-        grabFromAPI();
+        serverCalls.getFromServer(setCards);
     }, [cards])
-
-
-
-
-
-
-
 
     
     function addCard(inputCard){
 
+        serverCalls.postToServer(inputCard)
+        serverCalls.getFromServer(setCards)
 
-        fetch('http://localhost:5000/api', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(inputCard),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-
-
-        grabFromAPI();
-
-        // setCards(previous=>{
-        //     return[...previous,inputCard];
-        // });
     }
 
 
     function removeCard(idToDelete){
 
-        fetch(("http://localhost:5000/api/"+idToDelete),{
-            method: 'DELETE',
-        })
-        .then((response)=>response.json())
-        .then((data)=>{
-            console.log("Succesfully Deleted")
-        })
-        .catch(err=>{
-            console.error(err)
-        })
-
-
-
-
+        serverCalls.removeFromServer(idToDelete);
 
         setCards(previous=>{
             return previous.filter((item,index)=>{
@@ -90,15 +42,10 @@ function App(){
 
 
 
-    function showCards(){
-        
-    }
-
     return(
         <div>
             <Header />
             <CreateEvent inputNewEvent = {addCard}/>
-
             {cards.map((item)=>(
                 <EventCard 
                     key= {item._id}
