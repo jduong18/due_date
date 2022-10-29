@@ -1,5 +1,6 @@
 import React from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Zoom } from "@mui/material";
 
 function EventCard(props){
 
@@ -24,17 +25,38 @@ function EventCard(props){
 
 
 
+    let stressLevel = ""
+
+    if (timeRemaining >= 604800){
+        stressLevel = "relax status-bar";
+    }
+    else if(timeRemaining >= 259200 && timeRemaining < 604800){
+        stressLevel = "caution status-bar";
+    }
+    else if(timeRemaining > 86400 && timeRemaining < 259200){
+        stressLevel = "alert status-bar";
+    }
+    else if(timeRemaining > 0 && timeRemaining < 86400){
+        stressLevel = "panic status-bar";
+    }
+    else{
+        stressLevel= "overdue status-bar";
+        minutes = 0;
+        hours = 0;
+    }
 
     return(
         <div className="note">
             <h1>{props.title}</h1>
-             <p>{hours + " hours " + minutes + " minutes left "}</p>
+            <p>{hours + " hours " + minutes + " minutes left "}</p>
+            <div className={stressLevel}>
+
+            </div>
             <button onClick={()=>props.deleteCard(props.id)}>
                 <DeleteIcon />
             </button>
         </div>
     )
 }
-
 
 export default EventCard;

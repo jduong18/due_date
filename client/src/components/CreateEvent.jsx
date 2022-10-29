@@ -70,7 +70,7 @@ function CreateEvent(props){
     return(
         <div>
             <form className="create-note">
-                <input name="title" onClick={expand} onChange = {updateEventName} value = {event.eventName} placeholder="Title"></input>
+                <input name="title" onClick={expand} onChange = {updateEventName} value = {event.eventName} placeholder="Assignment"></input>
                 <input name="date" type="hidden" value={event.eventTime}></input>
             
    

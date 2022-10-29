@@ -62,10 +62,10 @@ function App(){
         <div>
             <Header />
             <CreateEvent inputNewEvent = {addCard}/>
-            {cards.sort((a,b)=>{return new Date (b.eventTime) - new Date (a.eventTime)}).map((item)=>(
+            {cards.sort((a,b)=>{return new Date (a.eventTime) - new Date (b.eventTime)}).map((item)=>(
                 <EventCard 
-                    key= {item._id}
-                    id= {item._id}
+                    key = {item._id}
+                    id = {item._id}
                     title =  {item.eventName}
                     content = {new Date(item.eventTime)}
                     deleteCard = {removeCard}
