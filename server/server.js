@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cors());
 
-mongoose.connect("mongodb://localhost:27017/dueDateDB")
+mongoose.connect("mongodb+srv://dueAdmin:appleorangekiwifruit@cluster0.sn0mvgo.mongodb.net/dueDateDB")
 
 
 

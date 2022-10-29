@@ -29,7 +29,7 @@ function App(){
     function removeCard(idToDelete){
 
         serverCalls.removeFromServer(idToDelete);
-
+        
         setCards(previous=>{
             return previous.filter((item,index)=>{
                 return item._id !== idToDelete

@@ -6,14 +6,26 @@ function EventCard(props){
 
 
 
-    const [time, setTime] = React.useState(Date.now());
+    // const [time, setTime] = React.useState(Date.now());
+
+    // React.useEffect(() => {
+    //     const interval = setInterval(() => setTime(Date.now()), 1000);
+    //     return () => {
+    //         clearInterval(interval);
+    //     };
+    // }, []);
+
+
+
+    const MINUTE_MS = 5000;
 
     React.useEffect(() => {
-        const interval = setInterval(() => setTime(Date.now()), 1000);
-        return () => {
-            clearInterval(interval);
-        };
-    }, []);
+    const interval = setInterval(() => {
+        console.log('Logs every minute');
+    }, MINUTE_MS);
+
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+    }, [])
 
 
 
