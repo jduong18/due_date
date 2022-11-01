@@ -1,5 +1,9 @@
+//import module
 import React from "react";
 
+
+
+//Simple component to create a header for application
 function Header(){
     return(
         <header>
@@ -8,5 +12,5 @@ function Header(){
     );
 }
 
-
+//export component
 export default Header;
